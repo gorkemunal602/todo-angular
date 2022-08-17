@@ -1,0 +1,86 @@
+<div class="page-home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="page-title">
+                    <img class="icon" src="../assets/icons/files.png" alt="file">
+                    <span>Todo List</span>
+                </h2>
+            </div>
+            <div id="form" class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>ToDo</mat-label>
+                    <input matInput placeholder="Todo"  #newTodo>
+                </mat-form-field>
+                
+                <button mat-flat-button color="primary" (click)="addTodo(newTodo)">Ekle</button>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <mat-card class="d-flex">
+
+                        <div cdkDropListGroup >
+                            <div class="example-container">
+                                <h2>Bekleyenler</h2>
+                                <div cdkDropList [cdkDropListData]="data.pendings" class="example-list"
+                                    cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)">
+                                    <div class="example-box" *ngFor="let item of data.pendings" cdkDrag>
+                                        
+                                        <img class="icon" src="../../../../assets/icons/clock.png" alt="Bekleyenler">
+                                        
+                                        <span class="todo-title">{{item.todo}}</span>
+                                        <div style="margin-left: 30px;" class="example-button-container">
+                                            <button (click)="removeTodo(item.id)" class="button" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+                                              <mat-icon>delete</mat-icon>
+                                            </button>
+                                          </div>
+                                    </div>
+                                    <div class="text-center pt-3 " *ngIf="data?.pendings.length === 0">burada madde yok</div>
+                                </div>
+                            </div>
+                            
+                            <div class="example-container">
+                                <h2>Yapılanlar</h2>
+
+                                <div cdkDropList [cdkDropListData]="data.inProgress" class="example-list"
+                                    (cdkDropListDropped)="drop($event)">
+                                    <div class="example-box" *ngFor="let item of data.inProgress" cdkDrag>
+                                        <img class="icon" src="../../../../assets/icons/hourglass.png" alt="Bekleyenler">
+                                        {{item.todo}}
+                                        <div style="margin-left: 30px;" class="example-button-container">
+                                            <button (click)="removeTodo(item.id)" class="button" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+                                              <mat-icon>delete</mat-icon>
+                                            </button>
+                                          </div>
+                                    </div>
+                                    <div class="text-center pt-3 " *ngIf="data?.inProgress.length === 0">burada madde yok</div>
+                                </div>
+                            </div>
+                            <div class="example-container">
+                                <h2>Tamamlananlar</h2>
+
+                                <div cdkDropList [cdkDropListData]="data.done" class="example-list"
+                                    (cdkDropListDropped)="drop($event)">
+                                    <div class="example-box" *ngFor="let item of data.done" cdkDrag>
+                                        <img class="icon" src="../../../../assets/icons/like.png" alt="Bekleyenler">
+                                        {{item.todo}}
+                                        <div style="margin-left: 30px;" class="example-button-container">
+                                            <button (click)="removeTodo(item.id)" class="button" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+                                              <mat-icon>delete</mat-icon>
+                                            </button>
+                                          </div>
+                                    </div>
+                                    <div class="text-center pt-3 " *ngIf="data?.done.length === 0">burada madde yok</div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </mat-card>
+                    <div class="col-md-12 text-center mt-2" style="color: grey;">@2022 From By Ismail Akça</div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
